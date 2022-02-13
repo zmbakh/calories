@@ -14,6 +14,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const DEFAULT_CALORIE_LIMIT = 2100;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,6 +46,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'role' => Role::class,
     ];
+
+    /**
+     * @return string
+     */
+    public function getCaloriesForTodayCacheKey(): string
+    {
+        return 'user-'. $this->id . '-calories';
+    }
 
     /**
      * @return HasMany

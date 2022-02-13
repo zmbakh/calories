@@ -37,6 +37,7 @@ class RegisterService
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->role = Role::User;
+        $user->calorie_limit = User::DEFAULT_CALORIE_LIMIT;
         $user->save();
 
         return $user;

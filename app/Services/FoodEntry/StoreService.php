@@ -5,6 +5,7 @@ namespace App\Services\FoodEntry;
 use App\Http\Requests\FoodEntry\StoreRequest;
 use App\Models\FoodEntry;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class StoreService
 {
@@ -13,6 +14,19 @@ class StoreService
      * @return FoodEntry
      */
     public function store(StoreRequest $request): FoodEntry
+    {
+        $foodEntry = $this->storeFoodEntry($request);
+
+        $this->forgetCache();
+
+        return $foodEntry;
+    }
+
+    /**
+     * @param StoreRequest $request
+     * @return FoodEntry
+     */
+    protected function storeFoodEntry(StoreRequest $request): FoodEntry
     {
         $foodEntry = new FoodEntry();
         $foodEntry->name = $request->input('name');
@@ -23,5 +37,13 @@ class StoreService
         $foodEntry->save();
 
         return $foodEntry;
+    }
+
+    /**
+     * @return void
+     */
+    protected function forgetCache()
+    {
+        Cache::forget(Auth::user()->getCaloriesForTodayCacheKey());
     }
 }
