@@ -15,7 +15,7 @@ class IndexService
      */
     public function getFoodEntries(IndexRequest $request):LengthAwarePaginator
     {
-        $foodEntries = FoodEntry::where('user_id', Auth::id());
+        $foodEntries = FoodEntry::where('user_id', Auth::id())->orderBy('date_time', 'desc')->orderBy('id', 'desc');
 
         if ($request->input('date_from')) {
             $foodEntries->where('date_time', '>=', $request->date('date_from')->startOfDay());
