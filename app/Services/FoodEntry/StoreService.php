@@ -2,38 +2,38 @@
 
 namespace App\Services\FoodEntry;
 
-use App\Http\Requests\FoodEntry\StoreRequest;
 use App\Models\FoodEntry;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Transfers\FoodEntry\StoreTransfer;
 use Illuminate\Support\Facades\Cache;
 
 class StoreService
 {
     /**
-     * @param StoreRequest $request
+     * @param StoreTransfer $transfer
      * @return FoodEntry
      */
-    public function store(StoreRequest $request): FoodEntry
+    public function store(StoreTransfer $transfer): FoodEntry
     {
-        $foodEntry = $this->storeFoodEntry($request);
+        $foodEntry = $this->storeFoodEntry($transfer);
 
-        $this->forgetCache();
+        $this->forgetCache($transfer->user);
 
         return $foodEntry;
     }
 
     /**
-     * @param StoreRequest $request
+     * @param StoreTransfer $transfer
      * @return FoodEntry
      */
-    protected function storeFoodEntry(StoreRequest $request): FoodEntry
+    protected function storeFoodEntry(StoreTransfer $transfer): FoodEntry
     {
         $foodEntry = new FoodEntry();
-        $foodEntry->name = $request->input('name');
-        $foodEntry->calories = $request->input('calories');
-        $foodEntry->date_time = $request->date('date_time');
-        $foodEntry->price = $request->input('price');
-        $foodEntry->user_id = Auth::id();
+        $foodEntry->name = $transfer->name;
+        $foodEntry->calories = $transfer->calories;
+        $foodEntry->date_time = $transfer->dateTime;
+        $foodEntry->price = $transfer->price;
+        $foodEntry->user_id = $transfer->user->id;
         $foodEntry->save();
 
         return $foodEntry;
@@ -42,9 +42,9 @@ class StoreService
     /**
      * @return void
      */
-    protected function forgetCache()
+    protected function forgetCache(User $user)
     {
-        Cache::forget(Auth::user()->getCaloriesForTodayCacheKey());
-        Cache::forget(Auth::user()->getMoneySpentCacheKey());
+        Cache::forget($user->getCaloriesForTodayCacheKey());
+        Cache::forget($user->getMoneySpentCacheKey());
     }
 }

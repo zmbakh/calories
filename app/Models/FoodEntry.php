@@ -10,6 +10,10 @@ class FoodEntry extends Model
 {
     use HasFactory;
 
+    protected $dates = [
+        'date_time',
+    ];
+
     /**
      * @return BelongsTo
      */

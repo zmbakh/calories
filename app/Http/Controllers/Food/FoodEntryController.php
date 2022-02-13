@@ -35,7 +35,7 @@ class FoodEntryController extends Controller
      */
     public function store(StoreService $service, StoreRequest $request): FoodEntryResource
     {
-        return new FoodEntryResource($service->store($request));
+        return new FoodEntryResource($service->store($request->makeTransferObject()));
     }
 
     /**

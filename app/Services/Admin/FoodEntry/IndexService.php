@@ -26,6 +26,6 @@ class IndexService
             $foodEntries->whereIn('user_id', $request->input('user_ids'));
         }
 
-        return $foodEntries->paginate();
+        return $foodEntries->with('user')->paginate();
     }
 }
