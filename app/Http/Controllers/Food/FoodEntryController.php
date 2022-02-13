@@ -46,7 +46,7 @@ class FoodEntryController extends Controller
      */
     public function show(FoodEntry $foodEntry): FoodEntryResource
     {
-        return new FoodEntryResource($foodEntry);
+        //
     }
 
     /**
