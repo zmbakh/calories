@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Enums\User\Role;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -35,6 +36,7 @@ class RegisterService
         $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
+        $user->role = Role::User;
         $user->save();
 
         return $user;
