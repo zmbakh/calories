@@ -6,3 +6,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('food-entries', FoodEntryController::class);
 Route::get('report/entries-added', [ReportController::class, 'entriesAdded']);
+Route::get('report/average-calories', [ReportController::class, 'averageCalories']);

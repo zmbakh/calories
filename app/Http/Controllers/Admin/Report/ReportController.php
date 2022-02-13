@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin\Report;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Report\AverageCaloriesResource;
 use App\Http\Resources\Report\EntriesAddedResource;
+use App\Services\Admin\Report\AverageCaloriesService;
 use App\Services\Admin\Report\EntriesAddedService;
-use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
@@ -16,5 +17,14 @@ class ReportController extends Controller
     public function entriesAdded(EntriesAddedService $service): EntriesAddedResource
     {
         return new EntriesAddedResource($service->getReport());
+    }
+
+    /**
+     * @param AverageCaloriesService $service
+     * @return AverageCaloriesResource
+     */
+    public function averageCalories(AverageCaloriesService $service): AverageCaloriesResource
+    {
+        return new AverageCaloriesResource($service->getAverageCalories());
     }
 }
