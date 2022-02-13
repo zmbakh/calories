@@ -16,6 +16,8 @@ class User extends Authenticatable
 
     public const DEFAULT_CALORIE_LIMIT = 2100;
 
+    public const MONTHLY_MONEY_LIMIT = 1000;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -53,6 +55,14 @@ class User extends Authenticatable
     public function getCaloriesForTodayCacheKey(): string
     {
         return 'user-'. $this->id . '-calories';
+    }
+
+    /**
+     * @return string
+     */
+    public function getMoneySpentCacheKey(): string
+    {
+        return 'user-'. $this->id . '-money';
     }
 
     /**

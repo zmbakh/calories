@@ -30,7 +30,7 @@ class CheckLimitService
     protected function getCaloriesForToday(): float
     {
         return FoodEntry::where('date_time', '>=', now()->startOfDay())
-            ->where('date_time', '<=', now()->endOfDay())
+            ->where('date_time', '<', now()->addDay()->startOfDay())
             ->where('user_id', Auth::id())
             ->sum('calories');
     }
