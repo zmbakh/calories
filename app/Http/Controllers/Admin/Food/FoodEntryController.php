@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\FoodEntry\UpdateRequest;
 use App\Http\Resources\FoodEntry\FoodEntryResource;
 use App\Models\FoodEntry;
 use App\Services\Admin\FoodEntry\IndexService;
+use App\Services\FoodEntry\CacheForgetService;
 use App\Services\FoodEntry\StoreService;
 use App\Services\FoodEntry\UpdateService;
 
@@ -69,9 +70,11 @@ class FoodEntryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param FoodEntry $foodEntry
+     * @param CacheForgetService $cacheForgetService
      */
-    public function destroy(FoodEntry $foodEntry)
+    public function destroy(FoodEntry $foodEntry, CacheForgetService $cacheForgetService)
     {
         $foodEntry->delete();
+        $cacheForgetService->forgetCache($foodEntry->user);
     }
 }

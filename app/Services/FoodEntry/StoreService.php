@@ -3,12 +3,20 @@
 namespace App\Services\FoodEntry;
 
 use App\Models\FoodEntry;
-use App\Models\User;
 use App\Transfers\FoodEntry\StoreTransfer;
-use Illuminate\Support\Facades\Cache;
 
 class StoreService
 {
+    protected CacheForgetService $cacheForgetService;
+
+    /**
+     * @param CacheForgetService $cacheForgetService
+     */
+    public function __construct(CacheForgetService $cacheForgetService)
+    {
+        $this->cacheForgetService = $cacheForgetService;
+    }
+
     /**
      * @param StoreTransfer $transfer
      * @return FoodEntry
@@ -17,7 +25,7 @@ class StoreService
     {
         $foodEntry = $this->storeFoodEntry($transfer);
 
-        $this->forgetCache($transfer->user);
+        $this->cacheForgetService->forgetCache($transfer->user);
 
         return $foodEntry;
     }
@@ -37,14 +45,5 @@ class StoreService
         $foodEntry->save();
 
         return $foodEntry;
-    }
-
-    /**
-     * @return void
-     */
-    protected function forgetCache(User $user)
-    {
-        Cache::forget($user->getCaloriesForTodayCacheKey());
-        Cache::forget($user->getMoneySpentCacheKey());
     }
 }

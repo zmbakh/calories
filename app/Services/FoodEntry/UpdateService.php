@@ -3,12 +3,20 @@
 namespace App\Services\FoodEntry;
 
 use App\Models\FoodEntry;
-use App\Models\User;
 use App\Transfers\FoodEntry\UpdateTransfer;
-use Illuminate\Support\Facades\Cache;
 
 class UpdateService
 {
+    protected CacheForgetService $cacheForgetService;
+
+    /**
+     * @param CacheForgetService $cacheForgetService
+     */
+    public function __construct(CacheForgetService $cacheForgetService)
+    {
+        $this->cacheForgetService = $cacheForgetService;
+    }
+
     /**
      * @param FoodEntry $foodEntry
      * @param UpdateTransfer $transfer
@@ -18,7 +26,7 @@ class UpdateService
     {
         $foodEntry = $this->storeFoodEntry($foodEntry, $transfer);
 
-        $this->forgetCache($foodEntry->user);
+        $this->cacheForgetService->forgetCache($foodEntry->user);
 
         return $foodEntry;
     }
@@ -37,14 +45,5 @@ class UpdateService
         $foodEntry->save();
 
         return $foodEntry;
-    }
-
-    /**
-     * @return void
-     */
-    protected function forgetCache(User $user)
-    {
-        Cache::forget($user->getCaloriesForTodayCacheKey());
-        Cache::forget($user->getMoneySpentCacheKey());
     }
 }
