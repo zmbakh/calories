@@ -5,7 +5,7 @@ namespace App\Exceptions\Handlers;
 use App\Http\Resources\Errors\ErrorResponse;
 use Throwable;
 
-class DefaultHandler extends AbstractHandler
+class NotFoundHttpExceptionHandler extends AbstractHandler
 {
     /**
      * @param $request
@@ -17,8 +17,7 @@ class DefaultHandler extends AbstractHandler
         $code = $this->checkCode($exception->getCode());
 
         return (new ErrorResponse([
-            'message' => $exception->getMessage() ?: 'Internal errors',
+            'message' => $exception->getMessage() ?: 'The page not found',
         ]))->response()->setStatusCode($code);
     }
-
 }

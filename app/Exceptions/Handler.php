@@ -3,10 +3,12 @@
 namespace App\Exceptions;
 
 use App\Exceptions\Handlers\DefaultHandler;
+use App\Exceptions\Handlers\NotFoundHttpExceptionHandler;
 use App\Exceptions\Handlers\ValidationExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -33,6 +35,7 @@ class Handler extends ExceptionHandler
 
     protected array $handlers = [
         ValidationException::class => ValidationExceptionHandler::class,
+        NotFoundHttpException::class => NotFoundHttpExceptionHandler::class,
     ];
 
     /**
