@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Food\FoodEntryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::prefix('auth')->withoutMiddleware('auth:sanctum')->group(function() {
     Route::post('login', [AuthController::class, 'login']);
 });
 
+Route::apiResource('food-entries', FoodEntryController::class);
