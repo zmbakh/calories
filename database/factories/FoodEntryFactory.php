@@ -14,10 +14,13 @@ class FoodEntryFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->streetName,
+            'date_time' => $this->faker->dateTime,
+            'calories' => $this->faker->randomFloat(null, 0, 1500),
+            'price' => $this->faker->numberBetween(1, 1000),
         ];
     }
 }
