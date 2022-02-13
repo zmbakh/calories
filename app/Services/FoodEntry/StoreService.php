@@ -45,5 +45,6 @@ class StoreService
     protected function forgetCache()
     {
         Cache::forget(Auth::user()->getCaloriesForTodayCacheKey());
+        Cache::forget(Auth::user()->getMoneySpentCacheKey());
     }
 }
