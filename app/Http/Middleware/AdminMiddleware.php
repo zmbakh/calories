@@ -17,7 +17,7 @@ class AdminMiddleware
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      * @throws ErrorException
      */
-    public function handle(Request $request, Closure $next): \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+    public function handle(Request $request, Closure $next)
     {
         if ($request->user()->role !== Role::Admin) {
             throw new ErrorException('Forbidden', 403);

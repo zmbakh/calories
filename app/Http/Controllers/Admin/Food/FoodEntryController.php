@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Food;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FoodEntry\IndexRequest;
+use App\Http\Resources\FoodEntry\FoodEntryResource;
+use App\Services\Admin\FoodEntry\IndexService;
 use Illuminate\Http\Request;
 
 class FoodEntryController extends Controller
@@ -11,11 +13,11 @@ class FoodEntryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(IndexRequest $request)
+    public function index(IndexService $service, IndexRequest $request)
     {
-        //
+        return FoodEntryResource::collection($service->getFoodEntries($request));
     }
 
     /**
