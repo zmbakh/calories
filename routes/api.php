@@ -12,3 +12,4 @@ Route::prefix('auth')->withoutMiddleware('auth:sanctum')->group(function() {
 
 Route::apiResource('food-entries', FoodEntryController::class);
 Route::get('calories-limit/check', [CalorieLimitController::class, 'check']);
+Route::get('calories-limit/by-days', [CalorieLimitController::class, 'caloriesByDays']);
