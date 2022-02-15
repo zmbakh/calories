@@ -12,6 +12,14 @@
         >
         </sidebar-item>
 
+          <sidebar-item
+              :link="{
+            name: 'Add Entry',
+            path: '/food-entries-create',
+            icon: 'ni ni-check-bold text-success',
+          }"
+          ></sidebar-item>
+
       </template>
     </side-bar>
     <div class="main-content">

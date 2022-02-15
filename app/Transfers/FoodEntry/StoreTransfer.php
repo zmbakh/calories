@@ -12,7 +12,7 @@ class StoreTransfer
         public readonly string $name,
         public readonly Carbon $dateTime,
         public readonly float $calories,
-        public readonly float $price,
+        public readonly ?float $price,
     )
     {
     }

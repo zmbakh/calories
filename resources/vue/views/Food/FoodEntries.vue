@@ -22,7 +22,7 @@
                             <base-input label="Date To" type="date" v-model="dateTo"/>
                         </b-col>
                         <b-col md="6" lg="4" xl="3" class="mt-lg-4 pt-lg-2">
-                            <base-button block type="primary" @click="filter">Button</base-button>
+                            <base-button block type="primary" @click="filter">Filter</base-button>
                         </b-col>
                     </b-row>
                     <b-card no-body>

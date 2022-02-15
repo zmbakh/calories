@@ -15,36 +15,17 @@ const routes = [
                 meta: {
                     auth: true
                 },
-                component: () => import(/* webpackChunkName: "demo" */ '../views/FoodEntries.vue')
+                component: () => import(/* webpackChunkName: "demo" */ '../views/Food/FoodEntries.vue')
             },
             {
-                path: '/dashboard',
-                name: 'dashboard',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () => import(/* webpackChunkName: "demo" */ '../views/Dashboard.vue')
+                path: '/food-entries-create',
+                name: 'add-food-entries',
+                meta: {
+                    auth: true
+                },
+                component: () => import(/* webpackChunkName: "demo" */ '../views/Food/Create.vue')
             },
-            {
-                path: '/icons',
-                name: 'icons',
-                component: () => import(/* webpackChunkName: "demo" */ '../views/Icons.vue')
-            },
-            {
-                path: '/profile',
-                name: 'profile',
-                component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/UserProfile.vue')
-            },
-            {
-                path: '/maps',
-                name: 'maps',
-                component: () => import(/* webpackChunkName: "demo" */ '../views/GoogleMaps.vue')
-            },
-            {
-                path: '/tables',
-                name: 'tables',
-                component: () => import(/* webpackChunkName: "demo" */ '../views/RegularTables.vue')
-            }
+
         ]
     },
     {
