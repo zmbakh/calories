@@ -61,7 +61,7 @@ class FoodEntryController extends Controller
      * @param UpdateRequest $request
      * @return FoodEntryResource
      */
-    public function update(FoodEntry $foodEntry, UpdateService $service, UpdateRequest $request)
+    public function update(FoodEntry $foodEntry, UpdateService $service, UpdateRequest $request): FoodEntryResource
     {
         return new FoodEntryResource($service->update($foodEntry, $request->makeTransferObject()));
     }
