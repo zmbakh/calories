@@ -23,7 +23,7 @@
         <a href="#" class="nav-link pr-0" @click.prevent slot="title-container">
           <b-media no-body class="align-items-center">
             <b-media-body class="ml-2 d-none d-lg-block">
-              <span class="mb-0 text-sm  font-weight-bold">{{ user.name || '' }} {{ user.last_name || '' }}</span>
+              <span class="mb-0 text-sm  font-weight-bold" v-if="user">{{ user.name || '' }} {{ user.last_name || '' }}</span>
             </b-media-body>
           </b-media>
         </a>
@@ -90,7 +90,6 @@ export default {
       }
   },
     mounted() {
-        console.log(this.user);
         if (!this.user) {
             userRepository.profile().then(response => {
                 this.$store.dispatch('auth/setUser', response.data);

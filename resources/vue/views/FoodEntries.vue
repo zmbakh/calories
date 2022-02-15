@@ -4,32 +4,8 @@
         <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-gradient-success">
             <!-- Card stats -->
             <b-row>
-                <b-col xl="3" md="6">
-                    <stats-card title="Calories For Today"
-                                type="gradient-red"
-                                sub-title="350,897"
-                                icon="ni ni-active-40"
-                                class="mb-4">
-
-                        <template slot="footer">
-                            <span class="text-success mr-2">3.48%</span>
-                            <span class="text-nowrap">Since last month</span>
-                        </template>
-                    </stats-card>
-                </b-col>
-                <b-col xl="3" md="6">
-                    <stats-card title="Money spent this month"
-                                type="gradient-orange"
-                                sub-title="2,356"
-                                icon="ni ni-chart-pie-35"
-                                class="mb-4">
-
-                        <template slot="footer">
-                            <span class="text-success mr-2">12.18%</span>
-                            <span class="text-nowrap">Since last month</span>
-                        </template>
-                    </stats-card>
-                </b-col>
+                <CaloriesForToday />
+                <MoneySpent />
             </b-row>
         </base-header>
 
@@ -102,11 +78,15 @@ import StatsCard from '@/components/Cards/StatsCard';
 import {format} from 'date-fns';
 import foodEntryRepository from "@/repositories/foodEntry/foodEntryRepository";
 import {Table, TableColumn} from 'element-ui'
+import CaloriesForToday from "@/views/Stats/CaloriesForToday";
+import MoneySpent from "@/views/Stats/MoneySpent";
 
 
 export default {
     components: {
         StatsCard,
+        CaloriesForToday,
+        MoneySpent,
         [Table.name]: Table,
         [TableColumn.name]: TableColumn
     },

@@ -20,7 +20,7 @@ class FoodEntryFactory extends Factory
             'name' => $this->foodName(),
             'date_time' => $this->faker->dateTime,
             'calories' => $this->faker->randomFloat(null, 0, 1500),
-            'price' => $this->faker->numberBetween(1, 1000),
+            'price' => $this->faker->numberBetween(1, 5),
         ];
     }
 
