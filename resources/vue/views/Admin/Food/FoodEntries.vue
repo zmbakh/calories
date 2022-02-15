@@ -76,6 +76,18 @@
                                              prop="date_time"
                                              min-width="140px">
                             </el-table-column>
+
+                            <el-table-column label="Actions"
+                                             min-width="140px">
+                                <template v-slot="{row}">
+                                    <base-button icon type="success" size="sm">
+                                        Edit
+                                    </base-button>
+                                    <base-button icon type="danger" size="sm" @click="deleteEntry(row.id)">
+                                        Delete
+                                    </base-button>
+                                </template>
+                            </el-table-column>
                         </el-table>
 
                         <b-card-footer class="py-4 d-flex justify-content-end">
@@ -144,6 +156,19 @@ export default {
             userRepository.index().then(response => {
                 this.users = response.data;
             });
+        },
+        deleteEntry(id) {
+            if (confirm('Are you sure you want to delete the entry?')) {
+                foodEntryRepository.destroy(id).then(() => {
+                    this.getFoodEntries();
+
+                    this.$notify({
+                        group: 'notification',
+                        title: 'Food entry was successfully deleted',
+                        position: 'top center',
+                    });
+                });
+            }
         }
     },
     mounted() {

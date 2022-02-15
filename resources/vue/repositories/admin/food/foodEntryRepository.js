@@ -11,7 +11,12 @@ function create(data) {
     return httpClient.post('/admin/food-entries', data);
 }
 
+function destroy(id) {
+    return httpClient.destroy(`/admin/food-entries/${id}`);
+}
+
 export default {
     index,
-    create
+    create,
+    destroy
 }
