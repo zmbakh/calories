@@ -25,6 +25,14 @@ const routes = [
                 },
                 component: () => import(/* webpackChunkName: "demo" */ '../views/Food/Create.vue')
             },
+            {
+                path: '/calorie-history',
+                name: 'Calorie report for month',
+                meta: {
+                    auth: true
+                },
+                component: () => import(/* webpackChunkName: "demo" */ '../views/Food/CalorieHistory.vue')
+            },
 
         ]
     },

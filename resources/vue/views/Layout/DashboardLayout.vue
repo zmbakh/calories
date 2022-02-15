@@ -20,6 +20,14 @@
           }"
           ></sidebar-item>
 
+          <sidebar-item
+              :link="{
+            name: 'Calorie History',
+            path: '/calorie-history',
+            icon: 'ni ni-archive-2 text-danger',
+          }"
+          ></sidebar-item>
+
       </template>
     </side-bar>
     <div class="main-content">

@@ -5,7 +5,7 @@ function caloriesForToday() {
 }
 
 function caloriesByDay(dateFrom, dateTo) {
-    return httpClient.get('/calories-limit/check', {
+    return httpClient.get('/calories-limit/by-days', null, {
         date_from: dateFrom,
         date_to: dateTo
     });

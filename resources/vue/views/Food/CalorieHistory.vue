@@ -2,11 +2,7 @@
     <div>
 
         <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-gradient-success">
-            <!-- Card stats -->
-            <b-row>
-                <CaloriesForToday />
-                <MoneySpent />
-            </b-row>
+
         </base-header>
 
         <!--Charts-->
@@ -32,38 +28,29 @@
 
                         <el-table class="table-responsive table"
                                   header-row-class-name="thead-light"
-                                  :data="foodEntries">
-                            <el-table-column label="Name"
-                                             prop="name"
-                                             min-width="140px">
-                            </el-table-column>
+                                  :data="calorieHistories">
 
+                            <el-table-column label="Date"
+                                             prop="date"
+                                             width="200px">
+                            </el-table-column>
                             <el-table-column label="Calories"
                                              prop="calories"
-                                             min-width="140px">
+                                             width="200px">
                                 <template v-slot="{row}">
                                     {{ row.calories }} kcal
                                 </template>
                             </el-table-column>
-
-                            <el-table-column label="Price"
-                                             prop="price"
-                                             min-width="140px">
+                            <el-table-column label="Calories"
+                                             prop="calories"
+                                             min-width="200px">
                                 <template v-slot="{row}">
-                                    <span v-if="row.price !== null">${{ row.price }}</span>
+                                    <span v-if="row.calories <= calorieLimit" class="text-success">The calorie limit wasn't exceeded</span>
+                                    <span v-if="row.calories > calorieLimit" class="text-danger">The calorie limit was exceeded</span>
                                 </template>
-                            </el-table-column>
-
-                            <el-table-column label="Time"
-                                             prop="date_time"
-                                             min-width="140px">
                             </el-table-column>
                         </el-table>
 
-                        <b-card-footer class="py-4 d-flex justify-content-end">
-                            <base-pagination v-model="currentPage" :per-page="perPage" :total="total"
-                                             @change="paginate"></base-pagination>
-                        </b-card-footer>
                     </b-card>
                 </b-col>
             </b-row>
@@ -73,20 +60,13 @@
     </div>
 </template>
 <script>
-// Components
-import StatsCard from '@/components/Cards/StatsCard';
-import {format} from 'date-fns';
-import foodEntryRepository from "@/repositories/foodEntry/foodEntryRepository";
+import {format, subMonths} from 'date-fns';
 import {Table, TableColumn} from 'element-ui'
-import CaloriesForToday from "@/views/Stats/CaloriesForToday";
-import MoneySpent from "@/views/Stats/MoneySpent";
+import statsRepository from "@/repositories/foodEntry/statsRepository";
 
 
 export default {
     components: {
-        StatsCard,
-        CaloriesForToday,
-        MoneySpent,
         [Table.name]: Table,
         [TableColumn.name]: TableColumn
     },
@@ -94,41 +74,34 @@ export default {
         return {
             dateFrom: null,
             dateTo: null,
-            foodEntries: [],
-            currentPage: 1,
-            perPage: 15,
-            total: 1,
+            calorieHistories: [],
+            calorieLimit: 2100,
         };
     },
     methods: {
-        paginate(page) {
-            this.currentPage = page;
-            this.getFoodEntries();
-        },
         filter() {
-            this.currentPage = 1;
-            this.getFoodEntries();
+            this.getCalorieHistory();
         },
         setDates() {
             let today = format(new Date(), 'YYYY-MM-DD');
-            this.dateFrom = today;
             this.dateTo = today;
+            this.dateFrom = format(subMonths(today, 1), 'YYYY-MM-DD');
         },
-        getFoodEntries() {
-            foodEntryRepository.index(this.currentPage, {
-                date_from: format(this.dateFrom, 'DD.MM.YYYY'),
-                date_to: format(this.dateTo, 'DD.MM.YYYY'),
-            }).then((response) => {
-                this.foodEntries = response.data;
-                this.currentPage = response.meta.current_page;
-                this.perPage = response.meta.per_page;
-                this.total = response.meta.total;
+        getCalorieHistory() {
+            statsRepository.caloriesForToday().then(response => {
+                this.calorieLimit = response.data.calorie_limit;
+            });
+            statsRepository.caloriesByDay(
+                format(this.dateFrom, 'DD.MM.YYYY'),
+                format(this.dateTo, 'DD.MM.YYYY')
+            ).then((response) => {
+                this.calorieHistories = response.data;
             });
         },
     },
     mounted() {
         this.setDates();
-        this.getFoodEntries();
+        this.getCalorieHistory();
     }
 };
 </script>
