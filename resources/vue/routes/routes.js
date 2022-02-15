@@ -88,6 +88,11 @@ const routes = [
                     guest: true
                 }
             },
+            {
+                path: '/403',
+                name: 'forbidden',
+                component: () => import(/* webpackChunkName: "demo" */ '../views/Forbidden.vue'),
+            },
             {path: '*', component: NotFound}
         ]
     }

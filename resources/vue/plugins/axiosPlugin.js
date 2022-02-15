@@ -56,9 +56,13 @@ axios.interceptors.response.use(function (response) {
         title: errorMessage || 'Server error',
         text: errorText
     })
-
-    store.dispatch('auth/logout');
-    router.push({name: 'Login'});
+    if (error.response.status === 401) {
+        store.dispatch('auth/logout');
+        router.push({name: 'login'});
+    }
+    if (error.response.status === 403) {
+        router.push({name: 'forbidden'});
+    }
 
     return Promise.reject(error);
 });

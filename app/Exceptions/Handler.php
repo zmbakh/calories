@@ -2,9 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\Handlers\AuthenticationExceptionHandler;
 use App\Exceptions\Handlers\DefaultHandler;
 use App\Exceptions\Handlers\NotFoundHttpExceptionHandler;
 use App\Exceptions\Handlers\ValidationExceptionHandler;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -34,6 +36,7 @@ class Handler extends ExceptionHandler
     ];
 
     protected array $handlers = [
+        AuthenticationException::class => AuthenticationExceptionHandler::class,
         ValidationException::class => ValidationExceptionHandler::class,
         NotFoundHttpException::class => NotFoundHttpExceptionHandler::class,
     ];

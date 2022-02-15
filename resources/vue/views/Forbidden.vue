@@ -6,8 +6,8 @@
         <div class="header-body text-center mb-7">
           <b-row class="justify-content-center">
             <b-col xl="5" lg="6" md="6" class="px-5">
-              <h1 class="text-light">Ooops!</h1>
-              <p class="text-lead text-white">Page not found. Don't worry though, we have plenty of other pages to explore</p>
+              <h1 class="text-light">Forbidden!</h1>
+              <p class="text-lead text-white">You are not allowed to access this page. Don't worry though, we have plenty of other pages to explore</p>
 
               <router-link to="/" class="font-weight-bold text-white mt-5">Back to dashboard</router-link>
             </b-col>
