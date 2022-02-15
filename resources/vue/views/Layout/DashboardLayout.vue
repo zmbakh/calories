@@ -28,6 +28,14 @@
           }"
           ></sidebar-item>
 
+          <sidebar-item
+              :link="{
+            name: 'All entries',
+            path: '/admin/food-entries',
+            icon: 'ni ni-folder-17 text-primary',
+          }" v-if="user && user.role === 2"
+          ></sidebar-item>
+
       </template>
     </side-bar>
     <div class="main-content">
@@ -75,6 +83,11 @@
       DashboardContent,
       FadeTransition
     },
+      computed: {
+        user() {
+            return this.$store.getters['auth/user'];
+        }
+      },
     methods: {
       initScrollbar() {
         let isWindows = navigator.platform.startsWith('Win');

@@ -33,7 +33,22 @@ const routes = [
                 },
                 component: () => import(/* webpackChunkName: "demo" */ '../views/Food/CalorieHistory.vue')
             },
-
+            {
+                path: '/admin/food-entries',
+                name: 'admin-food-entries',
+                meta: {
+                    auth: true
+                },
+                component: () => import(/* webpackChunkName: "demo" */ '../views/Admin/Food/FoodEntries.vue')
+            },
+            {
+                path: '/admin/food-entries-create',
+                name: 'admin-food-entries-create',
+                meta: {
+                    auth: true
+                },
+                component: () => import(/* webpackChunkName: "demo" */ '../views/Admin/Food/Create.vue')
+            },
         ]
     },
     {
