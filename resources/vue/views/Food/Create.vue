@@ -84,16 +84,10 @@
     </div>
 </template>
 <script>
-import EditProfileForm from '@/views/Pages/UserProfile/EditProfileForm.vue';
-import UserCard from '@/views/Pages/UserProfile/UserCard.vue';
 import {format} from "date-fns";
 import foodEntryRepository from "@/repositories/foodEntry/foodEntryRepository";
 
 export default {
-    components: {
-        EditProfileForm,
-        UserCard
-    },
     data() {
         return {
             model: {

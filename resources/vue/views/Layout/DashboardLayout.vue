@@ -33,7 +33,15 @@
             name: 'All entries',
             path: '/admin/food-entries',
             icon: 'ni ni-folder-17 text-primary',
-          }" v-if="user && user.role === 2"
+          }" v-if="isAdmin"
+          ></sidebar-item>
+
+          <sidebar-item
+              :link="{
+            name: 'Reports',
+            path: '/admin/reports',
+            icon: 'ni ni-single-copy-04 text-success',
+          }" v-if="isAdmin"
           ></sidebar-item>
 
       </template>
@@ -84,8 +92,8 @@
       FadeTransition
     },
       computed: {
-        user() {
-            return this.$store.getters['auth/user'];
+        isAdmin() {
+            return this.$store.getters['auth/isAdmin'];
         }
       },
     methods: {

@@ -57,6 +57,14 @@ const routes = [
                 },
                 component: () => import(/* webpackChunkName: "demo" */ '../views/Admin/Food/Edit.vue')
             },
+            {
+                path: '/admin/reports',
+                name: 'admin-reports',
+                meta: {
+                    auth: true
+                },
+                component: () => import(/* webpackChunkName: "demo" */ '../views/Admin/Report/Reports.vue')
+            },
         ]
     },
     {

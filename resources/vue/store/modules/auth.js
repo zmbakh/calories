@@ -14,6 +14,9 @@ const getters = {
     },
     loggedIn: state => {
         return !!state.token;
+    },
+    isAdmin: state => {
+        return state.user && state.user.role === 2;
     }
 }
 
