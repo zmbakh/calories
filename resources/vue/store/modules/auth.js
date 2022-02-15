@@ -11,6 +11,9 @@ const getters = {
     },
     token: state => {
         return state.token;
+    },
+    loggedIn: state => {
+        return !!state.token;
     }
 }
 
@@ -29,7 +32,9 @@ const actions = {
         commit('setToken', token);
         commit('setUser', user);
     },
-
+    setUser({commit}, user) {
+        commit('setUser', user);
+    },
     logout({commit}) {
         localStorage.removeItem('access_token');
         commit('setToken', null);

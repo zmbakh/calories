@@ -15,7 +15,7 @@
 
      <template>
 
-         <b-navbar-nav  class="align-items-lg-center ml-lg-auto">
+         <b-navbar-nav  class="align-items-lg-center ml-lg-auto" v-if="!loggedId">
            <b-nav-item to="/register">
                <i class="ni ni-circle-08"></i>
                <span class="nav-link-inner--text">Register</span>
@@ -84,7 +84,10 @@
     computed: {
       title() {
         return `${this.$route.name} Page`;
-      }
+      },
+        loggedId() {
+          return this.$store.getters['auth/loggedIn'];
+        }
     },
     methods: {
       toggleNavbar() {
