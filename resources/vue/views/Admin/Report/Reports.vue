@@ -74,13 +74,13 @@ export default {
     methods: {
         getAverageCalories() {
             reportsRepository.averageCalories().then(response => {
-                this.averageCalories = response.data.average_calories;
+                this.averageCalories = response.data.average_calories.toString();
             });
         },
         getEntitiesAdded() {
             reportsRepository.entitiesAdded().then(response => {
-                this.currentWeek = response.data.current_week;
-                this.previousWeek = response.data.previous_week;
+                this.currentWeek = response.data.current_week.toString();
+                this.previousWeek = response.data.previous_week.toString();
             });
         }
     },

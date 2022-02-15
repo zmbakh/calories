@@ -2,6 +2,7 @@ import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import store from "@/store";
+import router from "@/routes/router";
 
 axios.defaults.baseURL = '/api';
 
@@ -55,6 +56,10 @@ axios.interceptors.response.use(function (response) {
         title: errorMessage || 'Server error',
         text: errorText
     })
+
+    store.dispatch('auth/logout');
+    router.push({name: 'Login'});
+
     return Promise.reject(error);
 });
 
