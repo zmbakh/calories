@@ -62,6 +62,7 @@ export default {
     },
     mounted() {
         this.getMonthlyMoneyLimit();
+        setInterval(this.getMonthlyMoneyLimit, 5000);
     }
 }
 </script>

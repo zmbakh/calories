@@ -62,6 +62,7 @@ export default {
     },
     mounted() {
         this.getCaloriesForToday()
+        setInterval(this.getCaloriesForToday, 5000); //TODO make via websocket notification
     }
 }
 </script>
