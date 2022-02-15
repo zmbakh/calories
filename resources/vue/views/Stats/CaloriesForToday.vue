@@ -24,6 +24,7 @@ export default {
             limitExceeded: false,
             calories: null,
             calorieLimit: null,
+            interval: null
         };
     },
     computed: {
@@ -62,7 +63,10 @@ export default {
     },
     mounted() {
         this.getCaloriesForToday()
-        setInterval(this.getCaloriesForToday, 5000); //TODO make via websocket notification
+        this.interval = setInterval(this.getCaloriesForToday, 5000); //TODO make via websocket notification
+    },
+    destroyed() {
+        clearInterval(this.interval);
     }
 }
 </script>

@@ -24,6 +24,7 @@ export default {
             limitExceeded: null,
             money: null,
             monthlyLimit: null,
+            interval: null,
         };
     },
     computed: {
@@ -62,7 +63,10 @@ export default {
     },
     mounted() {
         this.getMonthlyMoneyLimit();
-        setInterval(this.getMonthlyMoneyLimit, 5000);
+        this.interval = setInterval(this.getMonthlyMoneyLimit, 5000);
+    },
+    destroyed() {
+        clearInterval(this.interval);
     }
 }
 </script>
