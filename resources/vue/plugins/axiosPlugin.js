@@ -1,15 +1,16 @@
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import store from "@/store";
 
 axios.defaults.baseURL = '/api';
 
 axios.interceptors.request.use(
     config => {
-        // const token = localStorage.getItem("access_token");
-        // if (token) {
-        //     config.headers.common["Authorization"] = token;
-        // }
+        const token = store.getters['auth/token'];
+        if (token) {
+            config.headers.common["Authorization"] = 'Bearer ' + token;
+        }
         return config;
     },
     error => {

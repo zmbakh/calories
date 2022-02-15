@@ -18,7 +18,7 @@ class FoodEntryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'date_time' => $this->date_time,
+            'date_time' => $this->date_time->toDateTimeString(),
             'calories' => $this->calories,
             'price' => $this->price,
             'user' => new UserResource($this->whenLoaded('user')),
