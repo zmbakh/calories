@@ -80,9 +80,9 @@
                             <el-table-column label="Actions"
                                              min-width="140px">
                                 <template v-slot="{row}">
-                                    <base-button icon type="success" size="sm">
+                                    <router-link class="btn base-button btn-success btn-sm btn-icon btn-fab" :to="{name: 'admin-food-entries-update', params: {id: row.id}}">
                                         Edit
-                                    </base-button>
+                                    </router-link>
                                     <base-button icon type="danger" size="sm" @click="deleteEntry(row.id)">
                                         Delete
                                     </base-button>

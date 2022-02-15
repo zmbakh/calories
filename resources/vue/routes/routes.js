@@ -42,12 +42,20 @@ const routes = [
                 component: () => import(/* webpackChunkName: "demo" */ '../views/Admin/Food/FoodEntries.vue')
             },
             {
-                path: '/admin/food-entries-create',
+                path: '/admin/food-entries/create',
                 name: 'admin-food-entries-create',
                 meta: {
                     auth: true
                 },
                 component: () => import(/* webpackChunkName: "demo" */ '../views/Admin/Food/Create.vue')
+            },
+            {
+                path: '/admin/food-entries/:id',
+                name: 'admin-food-entries-update',
+                meta: {
+                    auth: true
+                },
+                component: () => import(/* webpackChunkName: "demo" */ '../views/Admin/Food/Edit.vue')
             },
         ]
     },
