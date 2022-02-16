@@ -31,7 +31,7 @@
                     </stats-card>
                 </b-col>
                 <b-col xl="3" md="6">
-                    <stats-card title="Average entities per user this week"
+                    <stats-card title="Average calories added per user this week"
                                 type="gradient-green"
                                 :sub-title="averageCalories"
                                 icon="ni ni-money-coins"
